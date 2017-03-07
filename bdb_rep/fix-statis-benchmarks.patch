@@ -30,4 +30,4 @@ diff -ruN statis-benchmarks/berkeleyDB/Makefile statis-benchmarks-mod/berkeleyDB
 +
 +bdbHashThreaded: bdbHashThreaded.c genericBerkeleyDBCode.c genericBerkeleyDBCode.h
 +	gcc bdbHashThreaded.c -o bdbHashThreaded \
-+	-g -I$(XTERN_ROOT)/apps/bdb_rep/install/include $(XTERN_ROOT)/apps/bdb_rep/install/lib/libdb.a -lpthread
++	-g -I$(BDB_ROOT)/bdb_rep/install/include $(BDB_ROOT)/bdb_rep/install/lib/libdb.a -lpthread

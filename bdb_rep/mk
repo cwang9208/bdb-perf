@@ -21,7 +21,7 @@
 
 
 VER=5.3.15
-APP_DIR=$XTERN_ROOT/apps/bdb_rep/
+APP_DIR=$BDB_ROOT/bdb_rep/
 DB_SRC_DIR=$APP_DIR/db-$VER
 cd $APP_DIR
 rm -rf db-$VER perf install statis-benchmarks
@@ -39,6 +39,14 @@ tar zxvf db-$VER.tar.gz
 
 # Build bdb.
 cd db-$VER/build_unix
+
+# Optional Features:
+#   --enable-posixmutexes   Force use of POSIX standard mutexes.
+# Optional Packages:
+#   --with-mutex=MUTEX      Select non-default mutex implementation.
+# Some influential environment variables:
+#   CFLAGS      C compiler flags
+#   CXXFLAGS    C++ compiler flags
 # The "--with-mutex=POSIX/pthreads" is a must, otherwise the __db_pthread_mutex_lock() will not be compiled into the library and few mutexes will be invoked.
 ../dist/configure CFLAGS="-O3 -g" CXXFLAGS="-O3 -g" --enable-posixmutexes --with-mutex=POSIX/pthreads --prefix=$APP_DIR/install
 make -j64 && make install

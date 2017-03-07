@@ -6,11 +6,11 @@ diff -ruN perf/Makefile perf-mod/Makefile
  t: t.c
  	cc t.c -o t \
 -	-g -I/usr/local/BerkeleyDB.4.3/include -L/usr/local/BerkeleyDB.4.3/lib -ldb-4.3
-+	-g -I$(XTERN_ROOT)/apps/bdb_rep/install/include -L$(XTERN_ROOT)/apps/bdb_rep/install/lib -ldb-5.3 -lrt
++	-g -I$(BDB_ROOT)/bdb_rep/install/include -L$(BDB_ROOT)/bdb_rep/install/lib -ldb-5.3 -lrt
  
  test:
 -	time ./t
-+	LD_LIBRARY_PATH=$(XTERN_ROOT)/apps/bdb_rep/install/lib time ./t
++	LD_LIBRARY_PATH=$(BDB_ROOT)/bdb_rep/install/lib time ./t
  	rm -rf ./TESTDIR
 diff -ruN perf/t.c perf-mod/t.c
 --- perf/t.c	2006-06-28 19:15:47.000000000 -0400

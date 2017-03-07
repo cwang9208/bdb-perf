@@ -2,7 +2,7 @@
 # http://www.enderunix.org/aget/
 
 OBJS = rep_msg.o rep_net.o rep_common.o
-DB_INSTALL_DIR=$(XTERN_ROOT)/apps/bdb_rep/install/
+DB_INSTALL_DIR=$(BDB_ROOT)/bdb_rep/install/
 CFLAGS = -g -O3 -W -I$(DB_INSTALL_DIR)/include/
 LDFLAGS = $(DB_INSTALL_DIR)/lib/libdb.a -lpthread
 CC = gcc
