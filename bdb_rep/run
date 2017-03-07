@@ -20,29 +20,16 @@
 #
 
 cd $BDB_ROOT/bdb_rep
-rm -rf out* serializer.log TXN
+rm -rf TXN
 mkdir TXN
 INIT_ENV_CMD="rm -rf TXN/*"
 APP=$BDB_ROOT/bdb_rep/bench3n
 NTHREADS=4
 NPARTITIONS=64
+# bench3n -n maxN [ -t nthreads ] [ -c cachesize-in-kbytes ] dir
 INPUT="-c 300000 -t $NTHREADS -nosynctxn -logbufsize 100 -partition $NPARTITIONS -n 3000 TXN"                  # 2 child threads, etc. Refer to: http://libdb.wordpress.com/3n1/
 echo "Running $APP $INPUT ..."
 
-# Run with xtern and draw time chart.
 $INIT_ENV_CMD;
-time LD_PRELOAD=$BDB_ROOT/dync_hook/interpose.so $APP $INPUT
-mv out out-rr
-# Since in this bdb local.options, we do not start idle thread, so we must keep tid1.
-#$BDB_ROOT/eval/draw-time-chart.pl ./out-rr --keep-tid1
-#mv time-chart.txt rr-time-chart.txt
-
-sleep 2;
-
-# Run non-det and draw time chart.
-$INIT_ENV_CMD;
-time LD_PRELOAD=$BDB_ROOT/eval/rand-intercept/rand-intercept.so $APP $INPUT
-mv out out-random
-#$BDB_ROOT/eval/draw-time-chart.pl ./out-random
-#mv time-chart.txt random-time-chart.txt
+time $APP $INPUT
 
