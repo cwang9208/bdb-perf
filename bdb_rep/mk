@@ -31,12 +31,6 @@ if [ ! -f db-$VER.tar.gz ]; then
 fi
 tar zxvf db-$VER.tar.gz
 
-# Uncomment below for experiment with dbug.
-# Comment them out for experiment with xtern only.
-#cd db-$VER
-#patch -p1 < ../divergence.patch
-#cd ..
-
 # Build bdb.
 cd db-$VER/build_unix
 
@@ -54,7 +48,6 @@ make -j64 && make install
 # Build bdb rep.
 cp -r $DB_SRC_DIR/src/dbinc/ $APP_DIR/install/include/
 cd $DB_SRC_DIR/examples/c/ex_rep/base
-#patch < $APP_DIR/bugs/00-bdb_rep_connect_race.patch
 cd $DB_SRC_DIR/examples/c/ex_rep
 cp $APP_DIR/rep_makefile_normal Makefile
 make
