@@ -7,7 +7,24 @@ killall -9 rep_mgr
 runRep(){
 	# Start the master.
 	mkdir master && cd master && mkdir data1
-	# rep_mgr -CM -h home -l host:port[-r host:port]
+
+	# Ex_rep, found in the examples_c/ex_rep subdirectory of the Berkeley DB distribution,
+	# is a simple but complete demonstration of a replicated application. The application
+	# is a mock stock ticker. The master accepts a stock symbol and a numerical value as
+	# input, and stores this information into a replicated database; either master or
+	# clients can display the contents of the database, given an empty input line.
+
+	# rep_mgr -h home -l host:port [-MC] [-r host:port]
+	# -h
+	# 	Specify a home directory for the database environment.
+	# -l
+	#  	Listen on local host "host" at port "port" for incoming connections.
+	# -M
+	#  	Configure this process as a master.
+	# -C
+	#  	Configure this process as a client.
+	# -r
+	#  	Identifies the helper site used for joining the group.
 	../gen-input | ../rep_mgr -M -h data1 -l 127.0.0.1:10001 -r 127.0.0.1:10002 -r 127.0.0.1:10003 > rep1.log 2>&1 &
 	cd $BDB_ROOT/bdb_rep
 	sleep 20
@@ -30,6 +47,3 @@ runRep(){
 
 echo "Running rep..."
 runRep;
-
-
-

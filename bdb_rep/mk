@@ -34,13 +34,13 @@ tar zxvf db-$VER.tar.gz
 # Build bdb.
 cd db-$VER/build_unix
 
-# Optional Features:
-#   --enable-posixmutexes   Force use of POSIX standard mutexes.
-# Optional Packages:
-#   --with-mutex=MUTEX      Select non-default mutex implementation.
-# Some influential environment variables:
-#   CFLAGS      C compiler flags
-#   CXXFLAGS    C++ compiler flags
+# --enable-posixmutexes
+# To force Berkeley DB to use the POSIX pthread mutex interfaces for underlying mutex support,
+# enter --enable-posixmutexes as an argument to configure.
+# --with-mutex=MUTEX
+# To force Berkeley DB to use a specific mutex implementation, configure with --with-mutex=MUTEX,
+# where MUTEX is the mutex implementation you want.
+
 # The "--with-mutex=POSIX/pthreads" is a must, otherwise the __db_pthread_mutex_lock() will not be compiled into the library and few mutexes will be invoked.
 ../dist/configure CFLAGS="-O3 -g" CXXFLAGS="-O3 -g" --enable-posixmutexes --with-mutex=POSIX/pthreads --prefix=$APP_DIR/install
 make -j64 && make install
