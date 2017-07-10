@@ -19,6 +19,10 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+# The benchmark computes a recursive mathematical function for a range of integers 1 through N.
+# Results for each value are stored in the database. In computing a new value, the database is
+# consulted for other values.
+
 cd $BDB_ROOT/bdb_rep
 rm -rf TXN
 mkdir TXN
